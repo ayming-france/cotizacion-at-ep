@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarification AT/EP - Ayming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://ayming-france.github.io/assets/engine/slides.css">
+  <!-- Versions soeurs, lues par le selecteur de langue du moteur. -->
+  <link rel="alternate" hreflang="es" href="https://ayming-france.github.io/cotizacion-at-ep/">
+  <link rel="alternate" hreflang="en" href="https://ayming-france.github.io/cotizacion-at-ep/en/">
+  <link rel="alternate" hreflang="fr" href="https://ayming-france.github.io/cotizacion-at-ep/fr/">
+  <style>
+    /* Bloc local propre à ce deck. À promouvoir dans le moteur si un 2e deck en a besoin. */
+
+    /* Espacement titre/sous-titre : les marges inline resserrees (2-8px) qui collaient
+       le sous-titre au titre ont ete retirees des attributs style (le token moteur
+       .slide-title { margin-bottom: 50px } gouverne desormais). Cette regle remonte
+       le sous-titre sous le titre et retablit un ecart en dessous de lui. */
+    .slide-inner > .slide-title + .content-paragraph { margin-top: -34px; margin-bottom: 36px; }
+    .lead-compact { font-size: var(--font-14); }
+    .lead-tight { font-size: 13.5px; }
+    .equipo-lead { font-size: var(--font-13); }
+    .title-espana { text-align: left; font-size: 32px; }
+    .title-implantacion { font-size: 26px; }
+
+    .rate-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--space-24); align-items: center; margin-top: var(--space-20); }
+    .rate-box { background: var(--bg-white); border-radius: var(--radius-14); padding: var(--space-22) var(--space-18); text-align: center; box-shadow: 0 6px 22px rgba(var(--blue-dark-rgb), .10); }
+    .rate-box .rate-value { font-size: 2.6rem; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: var(--leading-tight); }
+    .rate-box .rate-label { font-size: .78rem; color: #5a6b78; margin-top: var(--space-8); line-height: 1.35; }
+    .rate-box.office .rate-value { color: var(--gradient-green-end); }
+    .rate-gap { text-align: center; }
+    .rate-gap .gap-value { font-size: 1.6rem; font-weight: var(--weight-bold); color: var(--blue-primary); }
+    .rate-gap .gap-label { font-size: .7rem; color: #5a6b78; text-transform: uppercase; letter-spacing: .05em; }
+    .timeline-thesis { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-28); margin-top: var(--space-26); }
+    .tt-step { text-align: left; }
+    .tt-year { font-size: 2rem; font-weight: var(--weight-bold); color: var(--blue-dark); }
+    .tt-step.gap .tt-year { color: var(--blue-primary); }
+    .tt-bar { height: 6px; border-radius: 3px; background: #e3eef5; margin: var(--space-12) 0 var(--space-14); }
+    .tt-step.covered .tt-bar { background: var(--gradient-green-end); }
+    .tt-step.gap .tt-bar { background: repeating-linear-gradient(90deg,var(--blue-primary) 0 10px,#cfe8f7 10px 20px); }
+    .tt-text { font-size: .85rem; color: #3d4d5a; line-height: 1.55; text-align: left; }
+    .tt-text strong { color: var(--blue-dark); }
+    .kpi-table, .fee-table { width: 100%; border-collapse: collapse; margin-top: var(--space-12); font-size: .82rem; }
+    .kpi-table th, .fee-table th { text-align: left; background: var(--blue-dark); color: var(--bg-white); padding: var(--space-10) var(--space-14); font-weight: var(--weight-semibold); }
+    .kpi-table td, .fee-table td { padding: var(--space-9) var(--space-14); border-bottom: 1px solid #e6eef4; color: #3d4d5a; vertical-align: top; }
+    .req-list { max-width: 1120px; margin: var(--space-20) auto 0; display: flex; flex-direction: column; gap: var(--space-8); }
+    .req-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: var(--space-16);
+      background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-lg); padding: var(--space-9) var(--space-16);
+      box-shadow: 0 3px 12px rgba(var(--blue-dark-rgb), .05); }
+    .req-actor { font-size: 10.5px; font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: .04em;
+      text-align: center; padding: 5px var(--space-4); border-radius: 6px; color: var(--bg-white); }
+    .req-actor.ayming { background: var(--gradient-green-end); }
+    .req-actor.ambos { background: linear-gradient(135deg,var(--blue-primary),var(--gradient-green-end)); }
+    .req-el { font-size: 13.5px; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: var(--leading-snug); text-align: left; }
+    .req-src { font-size: 11.5px; color: #6b7d8a; margin-top: 2px; text-align: left; }
+    .req-time { font-size: 11.5px; color: #3d4d5a; background: #f2f8fc; border-radius: 6px;
+      padding: var(--space-6) var(--space-12); white-space: nowrap; text-align: center; }
+    .kpi-table tr:nth-child(even) td, .fee-table tr:nth-child(even) td { background: #f7fbfd; }
+    .kpi-table td:first-child, .fee-table td:first-child { font-weight: var(--weight-semibold); color: var(--blue-dark); }
+    .fee-table { font-size: .95rem; }
+    .fee-table td:last-child { font-weight: var(--weight-bold); color: var(--blue-primary); text-align: right; }
+    /* Composition en deux colonnes equilibrees plutot que le tableau des
+       scenarios centre en pleine largeur en dessous de tout : chaque colonne
+       empile deux blocs de meme largeur, sommets alignes. */
+    .oferta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-26); align-items: start; max-width: 1180px; margin: var(--space-10) auto 0; }
+    .oferta-col { display: flex; flex-direction: column; gap: var(--space-16); }
+    .oferta-col > .fee-table { margin-top: 0; }
+    .fee-note { background: var(--blue-dark); color: var(--bg-white); padding: var(--space-20) var(--space-24); border-radius: var(--radius-xl); font-size: .85rem; text-align: left; box-shadow: 0 8px 24px rgba(var(--blue-dark-rgb), .18); }
+    .fee-note p { color: var(--bg-white) !important; font-weight: var(--weight-bold); margin: 0 0 var(--space-8); }
+    .fee-note li { color: #eaf3f9; margin-bottom: var(--space-8); line-height: var(--leading-normal); }
+    .fee-note ol { margin: 0; padding-left: 18px; }
+    .fee-example { background: #f4fbf8; border-left: 4px solid var(--gradient-green-end); padding: var(--space-12) var(--space-18); border-radius: 0 var(--radius-md) var(--radius-md) 0; text-align: left; }
+    .fee-example-label { font-size: .72rem; font-weight: var(--weight-bold); letter-spacing: .06em; text-transform: uppercase; color: var(--gradient-green-end); margin-bottom: var(--space-4); }
+    .fee-example p { font-size: .85rem; color: #3d4d5a; margin: 0; }
+    .scenarios-block { margin: 0; }
+    .scenarios-label { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .1em; text-transform: uppercase; color: #9aa8b3; margin: 0 0 var(--space-6); text-align: left; }
+    .scenarios-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .scenarios-table th { text-align: left; background: var(--blue-dark); color: var(--bg-white); padding: 7px var(--space-12); font-weight: var(--weight-semibold); }
+    .scenarios-table th:last-child, .scenarios-table td:last-child { text-align: right; }
+    .scenarios-table td { padding: var(--space-6) var(--space-12); border-bottom: 1px solid #e6eef4; color: #3d4d5a; }
+    .scenarios-table tr:nth-child(even) td { background: #f7fbfd; }
+    .scenarios-table td:first-child { font-weight: var(--weight-semibold); color: var(--blue-dark); }
+    .scenarios-table td:last-child { font-weight: var(--weight-bold); color: var(--blue-primary); }
+    .scenarios-caption { margin: var(--space-6) 0 0; font-size: var(--font-11); color: #6b7d8a; text-align: left; }
+    .doc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-26); margin-top: var(--space-18); text-align: left; }
+    .doc-cols h4 { color: var(--blue-dark); font-size: .95rem; margin-bottom: var(--space-10); }
+    .doc-cols ul { text-align: left; padding-left: var(--space-18); }
+    .doc-cols li { font-size: .85rem; color: #3d4d5a; line-height: var(--leading-relaxed); margin-bottom: 5px; }
+
+    /* Gantt repris du deck arrets-longue-duree, adapte en mois. A promouvoir dans le moteur. */
+    @keyframes ganttBarGrow { from { opacity: 0; transform: scaleX(0); transform-origin: left; } to { opacity: 1; transform: scaleX(1); } }
+    .gantt { width: 100%; max-width: 1150px; margin: var(--space-16) auto 0; box-sizing: border-box; }
+    .gantt-row { display: flex; align-items: center; width: 100%; }
+    .gantt-row-label { width: 70px; flex: 0 0 70px; font-size: var(--font-11); color: #888; padding-right: var(--space-8); }
+    .gantt-months-grid { flex: 1 1 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+    .gantt-months-grid span { text-align: center; font-size: var(--font-12); font-weight: var(--weight-bold); color: var(--bg-white);
+      background: #1a68a8; padding: var(--space-9) 0; letter-spacing: .06em; }
+    .gantt-months-grid span:nth-child(1) { background: #4a90d9; }
+    .gantt-months-grid span:nth-child(2) { background: #2f7ec2; }
+    .gantt-months-grid span:nth-child(3) { background: #1a68a8; }
+    .gantt-months-grid span:nth-child(4) { background: #0a548c; }
+    .gantt-months-grid span:nth-child(5) { background: var(--blue-dark); }
+    .gantt-months-grid span:first-child { border-radius: var(--radius-md) 0 0 0; }
+    .gantt-months-grid span:last-child { border-radius: 0 var(--radius-md) 0 0; }
+    .gantt-phase { display: flex; align-items: flex-start; padding-top: var(--space-10); width: 100%; }
+    .gantt-phase-spacer { width: 70px; flex: 0 0 70px; font-size: var(--font-11); color: #8a99a5; padding-top: var(--space-4); }
+    .gantt-track { flex: 1 1 auto; position: relative; height: 70px; min-width: 0; border-top: 1px solid #eef3f7; }
+    .gantt-bar { position: absolute; top: var(--space-9); height: 5px; border-radius: 3px; opacity: 0; }
+    .gantt-bar::before, .gantt-bar::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 9px; height: 9px; border-radius: var(--radius-circle); }
+    .gantt-bar::before { left: -4px; } .gantt-bar::after { right: -4px; }
+    .gantt-bar.bar-1, .gantt-bar.bar-1::before, .gantt-bar.bar-1::after { background: #4a90d9; }
+    .gantt-bar.bar-2, .gantt-bar.bar-2::before, .gantt-bar.bar-2::after { background: #4a90d9; }
+    .gantt-bar.bar-3, .gantt-bar.bar-3::before, .gantt-bar.bar-3::after { background: var(--gradient-green-end); }
+    .gantt-bar.bar-4, .gantt-bar.bar-4::before, .gantt-bar.bar-4::after { background: var(--blue-dark); }
+    .gantt-bar.bar-5 { background: var(--blue-dark); }
+    .gantt-bar.bar-5::before { background: var(--blue-dark); }
+    .gantt-bar.bar-5::after { background: transparent; width: 0; height: 0; right: -7px;
+      border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 9px solid var(--blue-dark); border-radius: 0; }
+    .gantt-label { position: absolute; top: var(--space-24); font-size: var(--font-12); color: #3d4d5a; line-height: 1.45; opacity: 0; text-align: left; }
+    .gantt-label strong { color: var(--blue-dark); font-weight: var(--weight-bold); }
+    .slide.active .gantt-bar { animation: ganttBarGrow .5s cubic-bezier(.22,1,.36,1) forwards; }
+    .slide.active .gantt-bar.bar-1 { animation-delay: .30s; } .slide.active .gantt-label.lbl-1 { animation: ganttBarGrow .4s ease .40s forwards; }
+    .slide.active .gantt-bar.bar-2 { animation-delay: .50s; } .slide.active .gantt-label.lbl-2 { animation: ganttBarGrow .4s ease .60s forwards; }
+    .slide.active .gantt-bar.bar-3 { animation-delay: .70s; } .slide.active .gantt-label.lbl-3 { animation: ganttBarGrow .4s ease .80s forwards; }
+    .slide.active .gantt-bar.bar-4 { animation-delay: .90s; } .slide.active .gantt-label.lbl-4 { animation: ganttBarGrow .4s ease 1.0s forwards; }
+    .slide.active .gantt-bar.bar-5 { animation-delay: 1.1s; } .slide.active .gantt-label.lbl-5 { animation: ganttBarGrow .4s ease 1.2s forwards; }
+    /* Diviseur de section, base sur .slide.closing du moteur */
+    .cover .divider-eyebrow { margin-bottom: var(--space-8); color: rgba(255,255,255,.8); }
+    .divider-eyebrow { font-size: var(--font-13); letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,255,255,.75); font-weight: var(--weight-bold); margin-bottom: var(--space-14); }
+
+    /* Chevrons repris du gabarit Acciline (pre requis, acteurs, methode, livrables). */
+    .chev-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); width: 100%; max-width: 1180px; margin: var(--space-6) auto 0; }
+    .slide[data-chapter^="metodo-"] .slide-title { margin-top: var(--space-8); }
+    .slide[data-chapter^="metodo-"] .chev-row { margin-top: var(--space-34); }
+    .chev { position: relative; background: var(--blue-primary); color: var(--bg-white); padding: 13px var(--space-10) 13px var(--space-22);
+      text-align: center; font-weight: var(--weight-bold); font-size: var(--font-13); letter-spacing: .01em; white-space: nowrap;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%); }
+    .chev.chev-first { background: #eef3f7; color: #5a6b78;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%); }
+    .chev-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); width: 100%; max-width: 1180px; margin: var(--space-18) auto 0; }
+    .chev-cols.four-steps { min-height: 140px; }
+    .chev-col { padding: 0 var(--space-14); border-left: 1px solid #e3ecf2; text-align: left; }
+    .chev-col:first-child { border-left: none; }
+    .chev-col h5 { font-size: 12.5px; font-weight: var(--weight-bold); color: var(--blue-dark); margin: 0 0 var(--space-8); }
+    .chev-col ul { list-style: none; padding: 0; margin: 0; }
+    .chev-col li { position: relative; padding-left: var(--space-14); margin-bottom: 7px;
+      font-size: 12.5px; line-height: var(--leading-normal); color: #3d4d5a; text-align: left; }
+    .chev-col li::before { content: ''; position: absolute; left: 0; top: 7px;
+      width: 5px; height: 5px; border-radius: var(--radius-circle); background: var(--gradient-green-end); }
+    .wp-tag { display: inline-block; background: var(--blue-dark); color: var(--bg-white); font-size: var(--font-11);
+      font-weight: var(--weight-bold); letter-spacing: .08em; padding: var(--space-4) var(--space-10); border-radius: 4px; margin-bottom: var(--space-10); }
+
+    /* Una solucion ideal, gabarit type Manpower : titre en haut a gauche, grille 2 colonnes x 3
+       lignes icone+texte a gauche, photo plein cadre sur les 38% de droite.
+       La photo est une enfant directe de la section, posee en absolu contre ses bords : elle ne
+       passe pas par fitSlide, donc elle touche le bord droit quel que soit l'ecran. Quand elle
+       vivait dans la grille, le bord dependait du facteur d'echelle (bande blanche a 1920px) et
+       la hauteur forcee a 100% cachait le debordement du texte a fitSlide, qui le laissait
+       passer sous le bandeau sur un portable. */
+    .slide[data-chapter="valeur"] .slide-inner { max-width: none; width: min(50%, 720px); margin: 0 auto 0 max(0px, calc(30% - min(25%, 360px) - 40px)); }
+    .uis-main { text-align: left; }
+    .uis-title { text-align: left; margin: 0 0 var(--space-20); }
+    .uis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-22) 30px; }
+    .uis-item { text-align: left; }
+    .uis-ic { width: 58px; height: 58px; border-radius: var(--radius-circle); background: #e9f5fc;
+      display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-10); }
+    .uis-ic svg { width: 26px; height: 26px; color: var(--blue-primary); }
+    .uis-item p { font-size: 13.5px; line-height: var(--leading-normal); color: #3d4d5a; margin: 0; }
+    .uis-photo { position: absolute; top: 0; right: 0; bottom: var(--banner-h); width: 38%; overflow: hidden; }
+    .uis-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block; }
+
+    /* Cartes numerotees, reprises du gabarit de l'equipe (slide 4 du draft V1). */
+    .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-26); margin-top: var(--space-8); }
+    .num-card { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-xl);
+      padding: var(--space-24) var(--space-22) var(--space-20); box-shadow: 0 6px 24px rgba(var(--blue-dark-rgb), .06); text-align: left; }
+    .num-head { display: flex; align-items: center; gap: var(--space-10); margin-bottom: var(--space-18); }
+    .num-head .rule { flex: 1 1 auto; height: 1px; background: #dbe7ef; }
+    .num-badge { width: 26px; height: 26px; border-radius: var(--radius-circle); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg-white); font-size: var(--font-13); font-weight: var(--weight-bold); }
+    .num-title { font-size: var(--font-14); font-weight: var(--weight-bold); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+    .num-card.c1 .num-badge { background: var(--blue-primary); } .num-card.c1 .num-title { color: var(--blue-primary); }
+    .num-card.c2 .num-badge { background: var(--gradient-green-end); } .num-card.c2 .num-title { color: var(--gradient-green-end); }
+    .num-card.c3 .num-badge { background: var(--blue-dark); } .num-card.c3 .num-title { color: var(--blue-dark); }
+    .num-item { font-size: 13.5px; line-height: 1.55; color: #3d4d5a; padding: var(--space-12) 0; text-align: left; }
+    .num-item + .num-item { border-top: 1px solid #eef4f8; }
+    .num-item strong { color: var(--blue-dark); font-weight: var(--weight-bold); }
+
+    /* Cartes equipo v2 : nom + role a gauche, photo ronde a droite (bord de carte), puces a completer en dessous. */
+    .equipo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-12) var(--space-16); width: 100%; max-width: 1210px; margin: var(--space-10) auto 0; }
+    .equipo-card { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-14); padding: var(--space-12) var(--space-14) 13px;
+      box-shadow: 0 6px 20px rgba(var(--blue-dark-rgb), .06); }
+    .equipo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-8); margin-bottom: 7px; }
+    .equipo-name { font-size: 17px; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: 1.22; }
+    .equipo-role { font-size: var(--font-13); font-style: italic; color: #5a6b78; margin-top: 3px; line-height: 1.25; }
+    .equipo-photo { width: 68px; height: 68px; border-radius: var(--radius-circle); overflow: hidden; flex-shrink: 0; background: #eef4f8; }
+    .equipo-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(1); display: block; }
+    .equipo-icon { width: 68px; height: 68px; border-radius: var(--radius-circle); flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; background: linear-gradient(135deg,var(--blue-primary),var(--gradient-green-end)); }
+    .equipo-icon svg { width: 32px; height: 32px; color: var(--bg-white); }
+    .equipo-bullets { margin: 0; padding-left: 15px; text-align: left; }
+    .equipo-bullets li { font-size: 12.5px; line-height: 1.35; color: #3f4c56; margin-bottom: 3px; }
+    .equipo-bullets li:last-child { margin-bottom: 0; }
+    .por-completar { display: inline-block; background: #e9f5fc; color: var(--blue-primary); font-size: 9px; font-weight: var(--weight-bold);
+      text-transform: uppercase; letter-spacing: .03em; border-radius: 999px; padding: 1px 7px; }
+
+    .geo-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--space-12); max-width: 1080px; margin: var(--space-22) auto 0; }
+    .geo-item { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-lg); padding: var(--space-14) var(--space-8);
+      text-align: center; font-size: var(--font-13); font-weight: var(--weight-semibold); color: var(--blue-dark); box-shadow: 0 4px 14px rgba(var(--blue-dark-rgb), .05); }
+    .geo-item.home { background: linear-gradient(135deg,var(--blue-primary),var(--gradient-green-end)); color: var(--bg-white); border-color: transparent; }
+    .geo-region { grid-column: 1 / -1; font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .16em;
+      text-transform: uppercase; color: #9aa8b3; text-align: left; margin-top: var(--space-6); }
+
+    /* Deux domaines d'etude. Composant local, pas de grosse boite d'icone vide. */
+    .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-22); align-items: stretch;
+      max-width: 1180px; margin: var(--space-14) auto 0; }
+    .area-card { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: 18px; padding: var(--space-22) var(--space-24) var(--space-20);
+      box-shadow: 0 8px 28px rgba(var(--blue-dark-rgb), .07); display: flex; flex-direction: column; text-align: left; }
+    .area-head { display: flex; align-items: center; gap: var(--space-12); margin-bottom: var(--space-12); }
+    .area-chip { width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+      background: linear-gradient(135deg,#e6f4fb,#e4f6ef); display: flex; align-items: center; justify-content: center; }
+    .area-chip svg { width: 21px; height: 21px; color: var(--blue-primary); }
+    .area-num { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .16em; text-transform: uppercase; color: #9aa8b3; }
+    .area-title { font-size: 19px; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: 1.2; }
+    .area-lead { font-size: 13.5px; color: #4a5b68; line-height: 1.55; margin: 0 0 var(--space-14); text-align: left; }
+    .area-lead.area-lead-emphasis { font-size: 14.5px; }
+    .area-lead strong { color: var(--blue-dark); }
+    .area-card { border-top: 3px solid var(--blue-primary); }
+    .area-card.green { border-top-color: var(--gradient-green-end); }
+    .area-card.green .area-chip svg { color: var(--gradient-green-end); }
+    /* En-tete workflow : badge numerote, titre, icone distincte par aire. */
+    .area-head { padding-bottom: var(--space-14); border-bottom: 1px solid #eef3f7; }
+    .area-badge { width: 44px; height: 44px; border-radius: var(--radius-circle); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 21px; font-weight: var(--weight-black); color: var(--bg-white); box-shadow: 0 6px 16px rgba(var(--blue-dark-rgb), .16); }
+    .area-badge.b1 { background: linear-gradient(135deg,#12aeea,#1a7fc2); }
+    .area-badge.b2 { background: linear-gradient(135deg,#12c19b,#0a9b74); }
+    .area-htext { flex: 1; min-width: 0; }
+    .area-ic { width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; }
+    .area-ic svg { width: 22px; height: 22px; }
+    .area-card .area-ic { background: #e9f5fc; }
+    .area-card .area-ic svg { color: var(--blue-primary); }
+    .area-card.green .area-ic { background: #e4f6ef; }
+    .area-card.green .area-ic svg { color: var(--gradient-green-end); }
+    .area-card.green .area-num { color: #6aa08f; }
+    /* Les barres de jours ne tiennent pas sur un tiers de largeur : liste compacte a la place. */
+    .dl { margin-top: 2px; }
+    .dl-lab { display: flex; align-items: center; gap: var(--space-6); font-size: 10.5px; font-weight: var(--weight-bold);
+      letter-spacing: .06em; text-transform: uppercase; color: #9aa8b3; margin: 0 0 var(--space-6); }
+    .dl-lab.sep { margin-top: var(--space-12); }
+    .dl-lab i, .dl-lab svg { width: 13px; height: 13px; }
+    .dl-row { display: grid; grid-template-columns: auto 1fr; gap: var(--space-8); align-items: baseline;
+      padding: var(--space-6) var(--space-8); border-radius: 6px; background: #f4f8fb; margin-bottom: 5px; }
+    .dl-row.on { background: linear-gradient(90deg,#e6f4fb,#e4f6ef); }
+    .dl-d { font-size: var(--font-11); font-weight: var(--weight-bold); color: var(--blue-dark); }
+    .dl-w { font-size: var(--font-11); color: #4a5b68; line-height: 1.35; text-align: left; }
+    .dl-of { color: #9aa8b3; font-size: 9.5px; font-weight: 400; }
+    .area-foot { margin-top: var(--space-20); padding-top: 0; }
+    /* comparaison de taux */
+    .rc { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-14);
+      background: #f7fbfd; border-radius: var(--radius-14); padding: var(--space-16) var(--space-14); }
+    .rc-box { text-align: center; }
+    .rc-val { font-size: 2.1rem; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: var(--leading-tight); }
+    .rc-box.office .rc-val { color: var(--gradient-green-end); }
+    .rc-lab { font-size: var(--font-11); color: #6b7d8a; margin-top: var(--space-6); line-height: 1.35; }
+    .rc-gap { text-align: center; }
+    .rc-gap b { display: block; font-size: 1.05rem; color: var(--blue-primary); font-weight: var(--weight-bold); }
+    .rc-gap span { font-size: var(--font-10); text-transform: uppercase; letter-spacing: .1em; color: #9aa8b3; }
+    /* echelle des jours */
+    .ds-row { margin-bottom: var(--space-12); }
+    .ds-lab { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .06em; text-transform: uppercase;
+      color: #6b7d8a; margin-bottom: 5px; display: flex; align-items: center; gap: 7px; }
+    .ds-lab i, .ds-lab svg { width: 14px; height: 14px; }
+    .dayscale { display: grid; grid-template-columns: 4fr 6fr 7fr 7fr; gap: 5px; }
+    .dayscale.at { grid-template-columns: 4fr 20fr; }
+    .ds-seg { border-radius: var(--radius-md); padding: var(--space-8) 11px; text-align: left; min-height: 48px;
+      display: flex; flex-direction: column; justify-content: center; }
+    .ds-seg .ds-d { font-size: var(--font-12); font-weight: var(--weight-bold); color: var(--blue-dark); }
+    .ds-seg .ds-w { font-size: var(--font-10); margin-top: 2px; line-height: var(--leading-snug); color: #5a6b78; white-space: nowrap; }
+    .ds-seg.cp { background: #eef3f7; }
+    .ds-seg.sr { background: #e3f5ec; }
+    .ds-seg.sr .ds-w { color: #0a7d5f; }
+    .ds-foot { font-size: 10.5px; color: #9aa8b3; margin-top: var(--space-8); text-align: left; }
+    .imp-cap { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .04em; text-transform: uppercase; color: #9aa8b3; margin-bottom: var(--space-8); }
+    .imp2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); }
+    .imp2-card { background: #f7fbfd; border-radius: 10px; padding: 11px 13px; text-align: left; }
+    .imp2-when { font-size: var(--font-10); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: .06em; color: #9aa8b3; margin-bottom: var(--space-6); }
+    .imp2-rates { display: flex; align-items: baseline; gap: var(--space-8); }
+    .imp2-rates b { font-size: 22px; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: var(--leading-tight); }
+    .imp2-rates .to { color: var(--blue-primary); font-weight: var(--weight-bold); font-size: var(--font-14); }
+    .imp2-sub { font-size: 10.5px; color: #6b7d8a; margin-top: var(--space-6); line-height: 1.35; }
+    .imp2.rate-single { grid-template-columns: 1fr; }
+    .imp2.rate-single .imp2-card { padding: 9px 12px; }
+    .imp2.rate-single .rate-row { display: flex; align-items: flex-start; justify-content: center; gap: 18px; text-align: center; }
+    .imp2.rate-single .imp2-rates { justify-content: center; }
+    .imp2.rate-single .to { font-size: 22px; margin-top: 2px; }
+    .imp2.rate-single .rate-mid { font-size: 24px; }
+    .imp2.rate-single .imp2-note { text-align: center; margin-top: 10px; }
+    .ds-0 { background: #eef3f7; color: #8a99a5; }
+    .ds-1 { background: #dbe9f4; color: #23628f; }
+    .ds-2 { background: #bfe3f6; color: #0b5d86; }
+    .ds-3 { background: linear-gradient(90deg,var(--blue-primary),var(--gradient-green-end)); color: var(--bg-white); }
+    .link-band { max-width: 1180px; margin: var(--space-16) auto 0; display: flex; align-items: center; gap: var(--space-16);
+      background: linear-gradient(90deg, rgba(var(--blue-primary-rgb), .08), rgba(var(--gradient-green-end-rgb), .08));
+      border-left: 4px solid var(--gradient-green-end); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: var(--space-14) var(--space-18); }
+    .link-band i, .link-band svg { width: 26px; height: 26px; color: var(--gradient-green-end); flex-shrink: 0; }
+    .link-band p { margin: 0; font-size: var(--font-13); color: #3d4d5a; line-height: var(--leading-normal); text-align: left; }
+    .link-band strong { color: var(--blue-dark); }
+    /* Area 2 porte deux questions distinctes : l'avance, puis la disparition de la clave. */
+    /* Trois graphiques cote a cote dans Area 2 : deux echelles de jours et un versus. */
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-12); margin-top: var(--space-4); }
+    .g3-col { min-width: 0; }
+    .dl-sub { font-size: var(--font-10); color: #9aa8b3; margin: -2px 0 7px; line-height: var(--leading-snug); text-align: left; }
+    .g3-key { display: flex; flex-wrap: wrap; gap: var(--space-6) var(--space-18); margin-top: var(--space-14); }
+    .g3-key .k { display: flex; align-items: center; gap: var(--space-6); font-size: var(--font-11); color: #6b7d8a; }
+    .g3-key .k.dim { color: #9aa8b3; }
+    .g3-key b { color: var(--blue-dark); font-weight: var(--weight-bold); }
+    .g3-key .sw { width: 11px; height: 11px; border-radius: 3px; background: #f4f8fb;
+      border: 1px solid #e3ecf2; flex-shrink: 0; }
+    .g3-key .sw.on { background: #e3f5ec; border-color: #bfe6d4; }
+    .dl-note { font-size: var(--font-10); color: #9aa8b3; line-height: 1.35; text-align: left; margin-top: 7px; }
+    .g3-foot { margin: var(--space-10) 0 0; font-size: var(--font-11); color: #9aa8b3; text-align: left; }
+    .vs { display: flex; flex-direction: column; gap: 5px; }
+    .vs-box { background: #f4f8fb; border-radius: 6px; padding: 7px var(--space-9); }
+    .vs-box b { display: block; font-size: 1.35rem; font-weight: var(--weight-bold); color: var(--blue-dark); line-height: 1.05; }
+    .vs-box.office b { color: var(--gradient-green-end); }
+    .vs-box span { display: block; font-size: 10.5px; color: #6b7d8a; margin-top: 2px; line-height: var(--leading-snug); }
+    .vs-gap { font-size: var(--font-11); font-weight: var(--weight-bold); color: var(--blue-primary); text-align: center; }
+    .ds-note { font-size: var(--font-12); color: #4a5b68; line-height: var(--leading-normal); text-align: left; }
+    .ds-note strong { color: var(--blue-dark); }
+
+    /* Planning en phases, contenu repris mot pour mot de la slide 11 du draft. */
+    .ph-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-10); max-width: 1220px; margin: var(--space-16) auto 0; }
+    /* Bandes de phase, meme grille que .ph-grid : Fase A couvre A1 a A4, Fase B couvre B5 et B6.
+       Meme motif que la slide relais du deck performance marketing (trait puis libelle). */
+    .ph-zones { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-10);
+      width: 100%; max-width: 1220px; margin: var(--space-18) auto 0; text-align: left; }
+    .phz-a { grid-column: 1 / span 4; }
+    .phz-b { grid-column: 5 / span 2; }
+    .phz-line { display: block; height: 3px; border-radius: 2px; }
+    .phz-a .phz-line { background: var(--blue-primary); }
+    .phz-b .phz-line { background: var(--gradient-green-end); }
+    .phz-label { display: block; margin-top: var(--space-9); font-size: var(--font-12); font-weight: var(--weight-black);
+      letter-spacing: 1.3px; text-transform: uppercase; }
+    .phz-a .phz-label { color: var(--blue-primary); }
+    .phz-b .phz-label { color: var(--gradient-green-end); }
+    /* Nom descriptif accole a "Fase A/B", plus leger que le label pour rester au
+       second plan visuel. */
+    .phz-name { font-weight: 500; letter-spacing: normal; text-transform: none; }
+    .phz-sub { display: block; margin-top: 2px; font-size: 11.5px; color: #6b7d8a; line-height: 1.35; }
+    /* grille a rangees fixes : la liste absorbe le mou, donc les blocs Entregables
+       demarrent tous a la meme hauteur d'une carte a l'autre. */
+    .ph { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-lg); padding: var(--space-14) var(--space-12);
+      display: grid; grid-template-rows: auto auto auto auto 1fr auto;
+      box-shadow: 0 4px 16px rgba(var(--blue-dark-rgb), .06); }
+    .ph-tag { font-size: var(--font-10); font-weight: var(--weight-bold); letter-spacing: .12em; text-transform: uppercase; color: #9aa8b3; }
+    .ph-name { font-size: var(--font-15); font-weight: var(--weight-bold); color: var(--blue-dark); margin: 2px 0 1px; line-height: 1.15; }
+    .ph-dur { font-size: var(--font-11); color: var(--blue-primary); font-weight: var(--weight-semibold); margin-bottom: var(--space-9); }
+    .ph-bar { height: 4px; border-radius: 2px; margin-bottom: var(--space-10); }
+    .ph.a .ph-bar { background: var(--blue-primary); } .ph.b .ph-bar { background: var(--gradient-green-end); }
+    .ph ul { list-style: none; padding: 0; margin: 0 0 var(--space-8); }
+    .ph li { font-size: var(--font-11); color: #4a5b68; line-height: 1.45; padding-left: var(--space-10); position: relative; margin-bottom: var(--space-4); text-align: left; }
+    .ph li::before { content: ''; position: absolute; left: 0; top: var(--space-6); width: 4px; height: 4px; border-radius: var(--radius-circle); background: var(--gradient-green-end); }
+    .ph-out { border-top: 1px solid #eef4f8; padding-top: var(--space-8); margin-top: var(--space-8); min-height: 84px; font-size: 10.5px; color: #6b7d8a; line-height: 1.4; text-align: left; }
+    .ph-out b { display: block; color: var(--blue-dark); font-size: var(--font-10); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+    .ph-trans { max-width: 1220px; margin: var(--space-14) auto 0; background: #f2f9fd; border-left: 4px solid var(--blue-primary);
+      border-radius: 0 10px 10px 0; padding: var(--space-12) var(--space-16); font-size: var(--font-12); color: #3d4d5a; text-align: left; }
+    @keyframes phFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .slide[data-chapter="planning"] .phz,
+    .slide[data-chapter="planning"] .ph,
+    .slide[data-chapter="planning"] .ph-trans { opacity: 0; }
+    .slide[data-chapter="planning"].active .phz,
+    .slide[data-chapter="planning"].active .ph,
+    .slide[data-chapter="planning"].active .ph-trans { animation: phFadeIn .5s cubic-bezier(.22,1,.36,1) forwards; }
+    .slide[data-chapter="planning"].active .phz-a { animation-delay: .05s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(1) { animation-delay: .15s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(2) { animation-delay: .27s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(3) { animation-delay: .39s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(4) { animation-delay: .51s; }
+    .slide[data-chapter="planning"].active .phz-b { animation-delay: .65s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(5) { animation-delay: .78s; }
+    .slide[data-chapter="planning"].active .ph:nth-child(6) { animation-delay: .9s; }
+    .slide[data-chapter="planning"].active .ph-trans { animation-delay: 1.05s; }
+
+    /* Parcours de la donnee. Composant propre a cette slide, pas une n-ieme grille d'icones. */
+    .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch;
+      gap: 0; max-width: 1200px; margin: var(--space-18) auto 0; }
+    .flow-step { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-14); padding: var(--space-16) var(--space-16) var(--space-14);
+      box-shadow: 0 6px 20px rgba(var(--blue-dark-rgb), .06); display: flex; flex-direction: column; text-align: left; }
+    .flow-step .fs-n { font-size: var(--font-10); font-weight: var(--weight-bold); letter-spacing: .14em; text-transform: uppercase; color: #9aa8b3; }
+    .flow-step h4 { font-size: var(--font-15); color: var(--blue-dark); margin: 3px 0 7px; }
+    .flow-step p { font-size: var(--font-12); color: #4a5b68; line-height: var(--leading-normal); margin: 0; text-align: left; }
+    .flow-lock { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 var(--space-10); }
+    .flow-lock i, .flow-lock svg { width: 18px; height: 18px; color: var(--gradient-green-end); }
+    .flow-lock span { font-size: 9.5px; color: #6b7d8a; text-align: center; margin-top: var(--space-4); max-width: 92px; line-height: var(--leading-snug); }
+    .cert-band { display: flex; align-items: center; justify-content: center; gap: 30px;
+      max-width: 1200px; margin: var(--space-22) auto 0; padding-top: var(--space-16); border-top: 1px solid #eef4f8; }
+    .cert-band img { height: 54px; width: auto; }
+    .cert-band .cb-txt { font-size: var(--font-12); color: #6b7d8a; max-width: 330px; text-align: left; line-height: var(--leading-normal); }
+
+    /* Retos, lignes empilees. Volontairement different des grilles de cartes du deck. */
+
+
+    /* Le moteur donne 100vw au hero de l'introduction, largeur qui ne suit pas
+       l'echelle appliquee par fitSlide : le visuel finit en retrait. Correctif local,
+       en attendant le fix moteur deja inscrit au HANDOFF. */
+    .slide.slide-introduction { padding: 0; }
+    .slide-introduction .slide-inner { padding-left: 0; padding-right: 0; max-width: none; }
+    .slide-introduction .intro-hero { width: 100%; max-width: none; margin-left: 0; margin-right: 0; }
+
+    /* fitSlide recentre le slide-inner en reservant 16px de marge par rapport au
+       viewport, mais le slide part deja decale de 20px a droite par le nav-collapsed
+       du moteur. Cote droit, la marge tombe pile sur ces 16px ; cote gauche l'ecart
+       cumule les deux (2x20+16=56px, verifie a la mesure). On etire le hero de 42px
+       vers la gauche pour ramener les deux bords pres du meme 16px, sans toucher le moteur. */
+    .slide-introduction .intro-hero { margin-left: -42px; width: calc(100% + 42px); }
+
+    /* Cinquieme statistique ajoutee a la bande : le padding fixe (70px) et la taille
+       de chiffre (48px) du moteur, pensees pour 4 cartes, deborderaient a 1280px
+       avec une 5e. Resserre localement, sans toucher la regle partagee. */
+    .slide-introduction .intro-stat-card { padding: var(--space-16) var(--space-24); }
+    .slide-introduction .intro-stat-number { font-size: 34px; }
+
+    /* Indice, slide 2 del draft V1. */
+    .toc { max-width: 940px; margin: var(--space-10) auto 0; display: flex; flex-direction: column; gap: var(--space-9); }
+    .toc-row { display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: var(--space-18);
+      background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-lg); padding: 11px var(--space-18) 11px var(--space-14);
+      box-shadow: 0 5px 18px rgba(var(--blue-dark-rgb), .05); }
+    .toc-num { font-size: 26px; font-weight: var(--weight-bold); color: var(--blue-primary); text-align: center; line-height: var(--leading-tight); }
+    .toc-body { text-align: left; }
+    .toc-body h4 { font-size: var(--font-16); color: var(--blue-dark); margin: 0 0 2px; text-align: left; }
+    .toc-body p { margin: 0; font-size: 12.5px; color: #5a6b78; line-height: 1.45; text-align: left; }
+
+    /* Resumen ejecutivo, seccion 1 del pliego. */
+    .exec { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--space-22); max-width: 1200px; margin: var(--space-8) auto 0; align-items: start; }
+    .exec-main { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-xl); padding: var(--space-20) var(--space-24);
+      box-shadow: 0 6px 22px rgba(var(--blue-dark-rgb), .06); text-align: left; }
+    .exec-main h4 { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .14em; text-transform: uppercase; color: #9aa8b3; margin: 0 0 var(--space-6); }
+    .exec-main h4 + p { margin: 0 0 var(--space-16); }
+    .exec-main p { font-size: 13.5px; color: #3d4d5a; line-height: var(--leading-relaxed); text-align: left; }
+    .exec-main p strong { color: var(--blue-dark); }
+    .exec-side { display: flex; flex-direction: column; gap: var(--space-12); }
+    .exec-card { flex: 1 1 0; display: flex; gap: var(--space-12); align-items: flex-start; background: #f7fbfd; border-left: 4px solid var(--gradient-green-end);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: var(--space-12) var(--space-16); text-align: left; }
+    .exec-card:nth-child(2) { border-left-color: var(--blue-primary); }
+    .exec-card:nth-child(3) { border-left-color: var(--blue-dark); }
+    .exec-card i, .exec-card svg { width: 20px; height: 20px; color: var(--blue-dark); flex-shrink: 0; margin-top: 2px; }
+    .exec-card b { display: block; font-size: 13.5px; color: var(--blue-dark); margin-bottom: 3px; }
+    .exec-card span { font-size: var(--font-12); color: #4a5b68; line-height: var(--leading-normal); }
+
+    /* Metodologia, slides 7 y 8 del draft V1. Chevron inicial azul, borde izquierdo recto. */
+    .chev.chev-start { clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%); }
+    .chev-cols.four-steps .chev-col li { font-size: var(--font-13); }
+    .chev-row.green .chev { background: var(--gradient-green-end); }
+    .chev-cols.green .chev-col li::before { background: var(--blue-primary); }
+    .doc-band.green h4 { color: var(--gradient-green-end); }
+    .doc-band.green h4 i, .doc-band.green h4 svg { color: var(--gradient-green-end); }
+    /* La bande documents respire sous les quatre etapes plutot que de les toucher.
+       margin-top:auto ne sert a rien ici, .slide-inner fait la hauteur de son contenu. */
+    [data-chapter="metodo-1"] .doc-band,
+    [data-chapter="metodo-2"] .doc-band { margin-top: 46px; min-height: 152px; }
+    .doc-band { max-width: 1180px; margin: var(--space-16) auto 0; background: #f7fbfd; border-radius: var(--radius-lg); padding: var(--space-12) var(--space-18) var(--space-8); text-align: left; }
+    .doc-band h4 { display: flex; align-items: center; gap: var(--space-8); font-size: var(--font-13); color: var(--blue-dark); margin: 0; }
+    .doc-band h4 i, .doc-band h4 svg { width: 16px; height: 16px; color: var(--gradient-green-end); }
+    .doc-band .doc-cols { gap: var(--space-10) 30px; }
+    .doc-band .doc-cols li { font-size: 12.5px; margin-bottom: 3px; }
+    .ms-split { display: grid; grid-template-columns: 1.45fr 1fr; gap: var(--space-24); max-width: 1200px; margin: var(--space-8) auto 0; align-items: stretch; }
+    .ms-steps { display: flex; flex-direction: column; gap: var(--space-10); }
+    .ms-step { display: grid; grid-template-columns: 34px 1fr; gap: var(--space-14); align-items: flex-start; background: var(--bg-white);
+      border: 1px solid #e9f0f5; border-radius: var(--radius-lg); padding: var(--space-12) var(--space-16); box-shadow: 0 5px 18px rgba(var(--blue-dark-rgb), .05); text-align: left; }
+    .ms-n { width: 34px; height: 34px; border-radius: var(--radius-circle); background: var(--blue-primary); color: var(--bg-white); font-weight: var(--weight-bold); font-size: var(--font-15);
+      display: flex; align-items: center; justify-content: center; }
+    .ms-step:nth-child(2) .ms-n { background: var(--gradient-green-end); }
+    .ms-step:nth-child(3) .ms-n { background: var(--blue-dark); }
+    .ms-step:nth-child(4) .ms-n { background: linear-gradient(135deg,var(--blue-primary),var(--gradient-green-end)); }
+    .ms-step h4 { font-size: 14.5px; color: var(--blue-dark); margin: var(--space-4) 0 var(--space-4); }
+    .ms-step p { margin: 0; font-size: 12.5px; color: #4a5b68; line-height: var(--leading-normal); text-align: left; }
+    .ms-docs { background: #f7fbfd; border-radius: var(--radius-14); padding: var(--space-18) var(--space-20); text-align: left; }
+    .ms-docs h4 { display: flex; align-items: center; gap: var(--space-8); font-size: var(--font-14); color: var(--blue-dark); margin: 0 0 var(--space-12); }
+    .ms-docs h4 i, .ms-docs h4 svg { width: 17px; height: 17px; color: var(--gradient-green-end); }
+    .ms-docs ul { list-style: none; padding: 0; margin: 0; }
+    .ms-docs li { position: relative; padding-left: var(--space-16); margin-bottom: var(--space-10); font-size: var(--font-13); line-height: var(--leading-normal); color: #3d4d5a; text-align: left; }
+    .ms-docs li::before { content: ''; position: absolute; left: 0; top: var(--space-8); width: 6px; height: 6px; border-radius: var(--radius-circle); background: var(--gradient-green-end); }
+
+    /* Condiciones generales, seccion 5 del pliego. */
+    .cg-accept { max-width: 1200px; margin: var(--space-6) auto 0; display: flex; gap: var(--space-14); align-items: flex-start;
+      background: linear-gradient(90deg, rgba(var(--blue-primary-rgb), .08), rgba(var(--gradient-green-end-rgb), .08)); border-left: 4px solid var(--gradient-green-end);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: var(--space-12) var(--space-18); }
+    .cg-accept i, .cg-accept svg { width: 22px; height: 22px; color: var(--gradient-green-end); flex-shrink: 0; margin-top: 2px; }
+    .cg-accept p { margin: 0; font-size: var(--font-13); color: #3d4d5a; line-height: var(--leading-normal); text-align: left; }
+    .cg-accept strong { color: var(--blue-dark); }
+    .cg-accept em { color: #9aa8b3; font-style: normal; }
+    .cg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-14); max-width: 1200px; margin: var(--space-14) auto 0; }
+    .cg-card { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-14); padding: var(--space-14) var(--space-18);
+      box-shadow: 0 5px 18px rgba(var(--blue-dark-rgb), .05); text-align: left; }
+    .cg-head { display: flex; align-items: center; gap: var(--space-10); margin-bottom: 7px; }
+    .cg-head i, .cg-head svg { width: 18px; height: 18px; color: var(--blue-primary); flex-shrink: 0; }
+    .cg-head h4 { font-size: 14.5px; color: var(--blue-dark); margin: 0; }
+    .cg-card p { margin: 0; font-size: 12.5px; color: #4a5b68; line-height: var(--leading-normal); text-align: left; }
+    ul, ol, li { text-align: left; }
+
+    /* Retroplanning : calendrier + responsabilites en une vue globale. Composant
+       propre a la slide calendario, colonne gauche = livrable + acteur, grille de
+       droite = quand (barre de duree par lot). */
+    .rp { max-width: 1200px; margin: var(--space-10) auto 0; }
+    .rp-head, .rp-wp, .rp-trans { display: grid; grid-template-columns: minmax(340px,1.45fr) 2.15fr; align-items: stretch; }
+    .rp-hlabel { font-size: var(--font-11); font-weight: var(--weight-bold); letter-spacing: .1em; text-transform: uppercase;
+      color: #9aa8b3; display: flex; align-items: flex-end; padding: 0 var(--space-14) var(--space-8) 0; }
+    .rp-months { display: grid; grid-template-columns: repeat(4,1fr); align-self: end; }
+    .rp-months span { text-align: center; font-size: 12.5px; font-weight: var(--weight-bold); color: var(--bg-white); padding: var(--space-9) 0; }
+    .rp-months span:nth-child(1) { background: #2f7ec2; border-radius: var(--radius-md) 0 0 0; }
+    .rp-months span:nth-child(2) { background: #1c6aac; }
+    .rp-months span:nth-child(3) { background: #0d5793; }
+    .rp-months span:nth-child(4) { background: var(--blue-dark); border-radius: 0 var(--radius-md) 0 0; }
+    .rp-translbl { font-size: var(--font-11); font-weight: var(--weight-bold); color: #7c8b96; display: flex; align-items: center;
+      gap: 7px; padding: var(--space-8) var(--space-14) var(--space-8) 0; }
+    .rp-translbl i, .rp-translbl svg { width: 14px; height: 14px; color: #7c8b96; }
+    .rp-transbar { position: relative; padding: var(--space-6) 0; }
+    .rp-transbar span { display: flex; align-items: center; height: 22px; padding-left: var(--space-12); border-radius: 6px;
+      background: repeating-linear-gradient(90deg,#eef4f8,#eef4f8 9px,#e2edf4 9px,#e2edf4 18px);
+      font-size: var(--font-10); font-weight: var(--weight-bold); color: #8393a0; letter-spacing: .04em; }
+    .rp-phase { display: flex; align-items: center; gap: 11px; font-size: 12.5px; font-weight: var(--weight-black);
+      letter-spacing: .18em; text-transform: uppercase; padding: var(--space-16) 0 5px; text-align: left; }
+    .rp-phase::before { content: ''; width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+    .rp-phase::after { content: ''; flex: 1 1 auto; height: 2px; border-radius: 2px; }
+    .rp-phase.a { color: var(--blue-primary); }
+    .rp-phase.a::before { background: var(--blue-primary); }
+    .rp-phase.a::after { background: linear-gradient(90deg, rgba(var(--blue-primary-rgb), .5), rgba(var(--blue-primary-rgb), 0)); }
+    .rp-phase.b { color: var(--gradient-green-end); }
+    .rp-phase.b::before { background: var(--gradient-green-end); }
+    .rp-phase.b::after { background: linear-gradient(90deg, rgba(var(--gradient-green-end-rgb), .5), rgba(var(--gradient-green-end-rgb), 0)); }
+    .rp-left { padding: var(--space-9) var(--space-16) 11px 0; border-top: 1px solid #eef3f7; }
+    .rp-wpname { font-size: 13.5px; font-weight: var(--weight-bold); color: var(--blue-dark); margin-bottom: 7px;
+      display: flex; align-items: center; gap: var(--space-9); }
+    .rp-dur { font-size: var(--font-10); font-weight: var(--weight-bold); color: #6b7d8a; background: #f0f5f9;
+      padding: 2px var(--space-9); border-radius: var(--radius-2xl); letter-spacing: .02em; white-space: nowrap; }
+    .rp-del { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .rp-del li { display: grid; grid-template-columns: 60px 1fr auto; gap: var(--space-9); align-items: center; text-align: left; }
+    .rp-txt { font-size: 11.5px; color: #4a5b68; line-height: var(--leading-snug); }
+    .rp-chip { font-size: 8px; font-weight: var(--weight-black); letter-spacing: .02em; text-transform: uppercase;
+      color: var(--bg-white); padding: var(--space-4) 0; border-radius: 5px; text-align: center; }
+    .rp-chip.ay { background: var(--gradient-green-end); }
+    .rp-chip.al { background: var(--blue-dark); }
+    .rp-chip.bo { background: #f0921f; }
+    .rp-date { font-size: 10.5px; font-weight: var(--weight-bold); color: #6b7d8a; white-space: nowrap; }
+    .rp-track { position: relative; border-top: 1px solid #eef3f7; }
+    .rp-bar { position: absolute; top: 13px; height: 11px; border-radius: 6px; box-shadow: 0 2px 7px rgba(var(--blue-dark-rgb), .14); }
+    .rp-bar.a, .rp-bar.b { background: #c3ced6; }
+    .rp-bar.wp-encuadre { left: 25%; width: 14%; }
+    .rp-bar.wp-diagnostico { left: 39%; width: 19%; }
+    .rp-bar.wp-validacion { left: 58%; width: 24%; }
+    .rp-bar.wp-cuantificacion { left: 78%; width: 6%; }
+    .rp-bar.wp-regularizacion { left: 84%; width: 6%; }
+    .rp-bar.wp-recuperacion { left: 88%; width: 12%; }
+    .rp-foot { max-width: 1200px; margin: var(--space-12) auto 0; display: flex; gap: var(--space-18); align-items: center;
+      font-size: 10.5px; color: #8393a0; }
+    .rp-foot .rp-key { display: flex; align-items: center; gap: var(--space-6); }
+    .rp-foot .rp-dot { width: 10px; height: 10px; border-radius: 3px; }
+    .rp-foot .rp-dot.ay { background: var(--gradient-green-end); } .rp-foot .rp-dot.al { background: var(--blue-dark); }
+    .rp-foot .rp-dot.bo { background: #f0921f; }
+
+    /* Global y local : 4 colonnes photo, style Feu Vert en marque Ayming. */
+    .gl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-24); max-width: 1200px; margin: var(--space-20) auto 0; }
+    .gl-col { display: flex; flex-direction: column; text-align: center; }
+    .gl-photo { position: relative; }
+    .gl-img { border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 4 / 3.1; box-shadow: 0 10px 26px rgba(var(--blue-dark-rgb), .15); }
+    .gl-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gl-cross { position: absolute; right: var(--space-14); bottom: -16px; width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg,var(--blue-primary),var(--gradient-green-end)); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 7px 16px rgba(var(--gradient-green-end-rgb), .34); z-index: 2; }
+    .gl-cross::before { content: '+'; color: var(--bg-white); font-weight: var(--weight-black); font-size: 24px; line-height: var(--leading-tight); margin-top: -2px; }
+    .gl-col h4 { font-size: var(--font-16); color: var(--blue-primary); margin: var(--space-26) 0 var(--space-6); text-align: center; }
+    .gl-col p { font-size: 12.5px; color: #4a5b68; line-height: var(--leading-normal); margin: 0; text-align: center; }
+
+    /* Variante value-detail : chaque item devient titre + sous-texte au lieu d'une puce coche. */
+    .value-detail-list.vd-titled li { display: block; margin-bottom: var(--space-20); }
+    .value-detail-list.vd-titled li h4 { font-size: var(--font-18); font-weight: var(--weight-bold); color: var(--blue-dark); margin: 0 0 var(--space-4); line-height: 1.25; }
+    .value-detail-list.vd-titled li p { font-size: var(--font-15); color: #4a5b68; line-height: var(--leading-normal); margin: 0; }
+    /* metodo-1 et metodo-2 sont passees a 5 items chacune : marges et corps de texte
+       resserres, sur ces deux slides seulement, pour rester dans la hauteur disponible. */
+    .slide[data-chapter="metodo-1"] .value-detail-list.vd-titled li,
+    .slide[data-chapter="metodo-2"] .value-detail-list.vd-titled li { margin-bottom: var(--space-12); }
+    .slide[data-chapter="metodo-1"] .value-detail-list.vd-titled li h4,
+    .slide[data-chapter="metodo-2"] .value-detail-list.vd-titled li h4 { margin: 0 0 2px; }
+    .slide[data-chapter="metodo-1"] .value-detail-list.vd-titled li p,
+    .slide[data-chapter="metodo-2"] .value-detail-list.vd-titled li p { font-size: var(--font-14); line-height: 1.45; }
+    /* Le moteur ne cale l'entree animee que des items 1 a 4 (pas de regle nth-child(5)
+       dans slides.css), donc un 5e item herite du delai par defaut (0s) et apparait
+       en meme temps que les autres au lieu de suivre le rythme. Correctif local :
+       on prolonge la meme cadence de .10s pour ces deux diapositives seulement. */
+    .slide[data-chapter="metodo-1"] .value-detail-list li:nth-child(5),
+    .slide[data-chapter="metodo-2"] .value-detail-list li:nth-child(5) { animation-delay: .55s; }
+
+    /* Metodologia : timeline verticale, titre a gauche, etapes a droite (style Acciline). */
+    .mt-layout { display: grid; grid-template-columns: .82fr 1.55fr; gap: 54px; max-width: 1200px; margin: var(--space-6) auto 0; align-items: center; }
+    .mt-title { font-size: 34px; font-weight: var(--weight-bold); line-height: 1.2; text-align: left;
+      background: linear-gradient(90deg,var(--blue-primary),var(--gradient-green-end)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    /* Arc en fond, grand demi-cercle dont le titre occupe le creux. Espacement des
+       lignes agrandi (gap 24->32px, plus 14px de marge additionnelle avant la ligne 3
+       pour que la paire 2-3 respire plus que la paire 1-2 : 32 vs 46 entre les paires).
+       NOTE DE VERIFICATION (Playwright, mesures repetees) : a 1280x720 fitSlide calcule
+       systematiquement scale(1.07857) sur cette diapositive et .slide affiche 45px de
+       debordement (scrollHeight 765 vs clientHeight 720), IDENTIQUE que la hauteur
+       brute ajoutee soit +14px ou +30px. Le chiffre ne bouge pas avec l'espacement
+       vertical, donc la contrainte qui fixe ce scale est ailleurs (vraisemblablement
+       horizontale, cf. fitSlide dans slides.js qui agrandit jusqu'a designScale=1.2 des
+       qu'il reste de la marge sur un axe) : ce debordement preexiste a ce changement de
+       gap et n'est pas cause par lui. Correctif hors perimetre (moteur partage,
+       verification multi-decks requise), signale au porteur plutot que corrige ici.
+       Centres reels mesures a l'echelle 1 (transform gele, Playwright) : y=26 / 214.81
+       / 372.5 relatif au haut de .mt-rows. Rayon 420 et centre x=-340 inchanges
+       (l'ecart vertical reste largement sous le rayon) ; cy bouge avec les lignes 1 et
+       3 : cy=199.25 (leur mi-chemin), rayon 420, centre (-340,199.25). Verifie au bord
+       droit de la colonne titre (x local -54, a 54px de gauche de .mt-rows) que le
+       trait reste hors zone visible : offset vertical au cercle la-bas =
+       racine(420^2-286^2) = 307.6px, soit y = 199.25 +/- 307.6 = -108.35 ou 506.85,
+       tous deux hors de la hauteur reelle du contenu (0 a 458.19px mesures). Decalage
+       de chaque ligne recalcule depuis l'equation du cercle x = cx + racine(r^2-(y-cy)^2). */
+    .mt-rows { position: relative; display: flex; flex-direction: column; gap: var(--space-32); }
+    .mt-rows::before {
+      content: ''; position: absolute; z-index: 0; pointer-events: none; opacity: 0;
+      left: -760px; top: -220.75px; width: 840px; height: 840px; border-radius: var(--radius-circle);
+      border: 2px solid rgba(var(--blue-primary-rgb), .18);
+    }
+    .slide[data-chapter="gobernanza"].active .mt-rows::before { animation: mtArcFadeIn .4s ease forwards; }
+    @keyframes mtArcFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* L'arc (centre -340, 199.25, rayon 420) passe par le CENTRE de chaque icone :
+       cy a mi-chemin des lignes 1 et 3, donc lignes 1 et 3 alignees (marge 42.60px)
+       et ligne 2 a l'apex (marge 79.71px). Les lignes restent droites, la rotation
+       n'existe que pendant l'entree et retombe a 0, et les trois entrent depuis le
+       haut (rotate(-7deg) -> 0, y compris la ligne 3, corrigee du +7deg precedent qui
+       la faisait entrer par le bas). */
+    @keyframes mtRowSwingIn { from { opacity: 0; transform: rotate(-7deg); } to { opacity: 1; transform: rotate(0deg); } }
+    @keyframes mtRowSwingIn1 { from { opacity: 0; transform: rotate(-7deg); } to { opacity: 1; transform: rotate(0deg); } }
+    @keyframes mtRowSwingIn3 { from { opacity: 0; transform: rotate(-7deg); } to { opacity: 1; transform: rotate(0deg); } }
+    .mt-row { position: relative; z-index: 1; display: grid; grid-template-columns: 52px 1fr; gap: var(--space-20); align-items: start; opacity: 0; }
+    .mt-row:nth-child(1) { margin-left: 42.60px; width: calc(100% - 42.60px); transform-origin: -382.60px 199.25px; }
+    .mt-row:nth-child(2) { margin-left: 79.71px; width: calc(100% - 79.71px); transform-origin: -419.71px 10.44px; }
+    .mt-row:nth-child(3) { margin-left: 42.60px; width: calc(100% - 42.60px); margin-top: var(--space-14); transform-origin: -382.60px -147.25px; }
+    .slide[data-chapter="gobernanza"].active .mt-row { animation: mtRowSwingIn .6s cubic-bezier(.22,1,.36,1) forwards; }
+    .slide[data-chapter="gobernanza"].active .mt-row:nth-child(1) { animation-name: mtRowSwingIn1; animation-delay: .1s; }
+    .slide[data-chapter="gobernanza"].active .mt-row:nth-child(2) { animation-delay: .28s; }
+    .slide[data-chapter="gobernanza"].active .mt-row:nth-child(3) { animation-name: mtRowSwingIn3; animation-delay: .46s; }
+    .mt-ic { width: 52px; height: 52px; border-radius: var(--radius-14); flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg,#3cbdf0,var(--blue-primary)); box-shadow: 0 6px 16px rgba(var(--blue-primary-rgb), .30); }
+    .mt-ic svg { width: 26px; height: 26px; color: var(--bg-white); }
+    .mt-body h4 { font-size: var(--font-18); color: var(--blue-primary); margin: 5px 0 var(--space-8); text-align: left; }
+    .mt-body ul { list-style: none; margin: 0; padding: 0; }
+    .mt-body li { position: relative; padding-left: 17px; margin-bottom: var(--space-6); font-size: 13.5px; color: #4a5b68; line-height: 1.45; text-align: left; }
+    .mt-body li::before { content: ''; position: absolute; left: 0; top: var(--space-8); width: 6px; height: 6px; border-radius: var(--radius-circle); background: var(--blue-primary); }
+
+    /* Continuite : l'en-tete metodo reprend l'en-tete icone de la slide Dos areas. */
+    .value-detail-content .area-head { display: flex; align-items: center; gap: 15px; margin-bottom: var(--space-26); padding-bottom: 0; border-bottom: none; }
+    .value-detail-content .area-ic { width: 54px; height: 54px; border-radius: var(--radius-14); }
+    .value-detail-content .area-ic svg { width: 28px; height: 28px; }
+    .slide[data-chapter="metodo-1"] .value-detail-content .area-ic { background: #e9f5fc; }
+    .slide[data-chapter="metodo-1"] .value-detail-content .area-ic svg { color: var(--blue-primary); }
+    .slide[data-chapter="metodo-2"] .value-detail-content .area-ic { background: #e4f6ef; }
+    .slide[data-chapter="metodo-2"] .value-detail-content .area-ic svg { color: var(--gradient-green-end); }
+    .value-detail-content .area-num { font-size: var(--font-12); }
+    .value-detail-content .area-title { font-size: 27px; line-height: 1.15; }
+
+    /* Slide Documentos necesarios : deux colonnes, une par aire. */
+    /* Panneau clair, trois colonnes separees par des filets fins : composition
+       plus aerienne que les anciennes cartes a bordures et ombres marquees.
+       "En general" (7 items) recoit une colonne plus large que les deux autres. */
+    .docs3 { display: grid; grid-template-columns: 1.3fr 1fr; max-width: 1180px; margin: var(--space-20) auto 0;
+      background: #fbfdfe; border-radius: var(--radius-14); }
+    .docs3-col { padding: var(--space-18) var(--space-26); border-left: 1px solid #e6eef4; text-align: left; }
+    .docs3-col:first-child { border-left: none; }
+    .docs3-head { display: flex; align-items: center; gap: var(--space-9); margin-bottom: 11px; }
+    .docs3-ic { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .docs3-ic svg { width: 14px; height: 14px; }
+    .docs3-col.a .docs3-ic { background: #e9f5fc; } .docs3-col.a .docs3-ic svg { color: var(--blue-primary); }
+    .docs3-col.b .docs3-ic { background: #e4f6ef; } .docs3-col.b .docs3-ic svg { color: var(--gradient-green-end); }
+    .docs3-col.c .docs3-ic { background: #eef3f7; } .docs3-col.c .docs3-ic svg { color: var(--blue-dark); }
+    .docs3-head h4 { font-size: 12.5px; font-weight: var(--weight-bold); color: var(--blue-dark); margin: 0; text-transform: uppercase; letter-spacing: .04em; }
+    .docs3-list { list-style: none; margin: 0; padding: 0; }
+    .docs3-list li { position: relative; padding-left: 13px; margin-bottom: var(--space-6); font-size: var(--font-13); color: #3d4d5a; line-height: 1.35; }
+    .docs3-list li::before { content: ''; position: absolute; left: 0; top: var(--space-6); width: 5px; height: 5px; border-radius: var(--radius-circle); }
+    .docs3-col.a .docs3-list li::before { background: var(--blue-primary); }
+    .docs3-col.b .docs3-list li::before { background: var(--gradient-green-end); }
+    .docs3-col.c .docs3-list li::before { background: var(--blue-dark); }
+    .docs3-list li:last-child { margin-bottom: 0; }
+    .docs-coverage { max-width: 1180px; margin: var(--space-18) auto 0; display: flex; gap: var(--space-14); align-items: flex-start;
+      background: linear-gradient(90deg, rgba(var(--blue-primary-rgb), .08), rgba(var(--gradient-green-end-rgb), .08)); border-left: 4px solid var(--gradient-green-end);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: var(--space-12) var(--space-18); }
+    .docs-coverage i, .docs-coverage svg { width: 22px; height: 22px; color: var(--gradient-green-end); flex-shrink: 0; margin-top: 2px; }
+    .docs-coverage p { margin: 0; font-size: var(--font-13); color: #3d4d5a; line-height: var(--leading-normal); text-align: left; }
+    .docs-coverage strong { color: var(--blue-dark); }
+
+    /* Animation d'entree du retroplanning (slide calendario). */
+    @keyframes rpIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes rpBarGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .slide[data-chapter="calendario"] .rp-trans,
+    .slide[data-chapter="calendario"] .rp-phase,
+    .slide[data-chapter="calendario"] .rp-wp { opacity: 0; }
+    .slide[data-chapter="calendario"] .rp-bar { transform: scaleX(0); transform-origin: left center; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(2) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .05s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(3) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .16s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(4) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .26s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(5) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .36s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(6) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .46s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(7) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .58s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(8) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .68s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(9) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .78s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(10) { animation: rpIn .5s cubic-bezier(.22,1,.36,1) .88s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(4) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) .40s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(5) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) .50s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(6) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) .60s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(7) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) .70s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(9) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) .90s forwards; }
+    .slide[data-chapter="calendario"].active .rp > :nth-child(10) .rp-bar { animation: rpBarGrow .55s cubic-bezier(.22,1,.36,1) 1.0s forwards; }
+      /* Bandeau de certifications de la couverture : fond blanc volontaire, les PNG
+       ont des fonds blancs opaques et le patchwork se voyait dans l'export PPTX. */
+    .slide.cover .cover-right .cert-strip { background: var(--bg-white); border-radius: var(--radius-14);
+      padding: var(--space-12) var(--space-18); left: auto; right: var(--space-24); box-shadow: 0 4px 14px rgba(var(--blue-dark-rgb), .10); }
+</style>
+</head>
+<body data-audience="client" data-no-partners>
+
+  <nav class="chapter-nav">
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <div class="nav-header">
+      <div class="nav-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+      <span class="nav-subtitle">Tarification AT/EP</span>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Le contexte</div>
+      <div class="nav-item active" data-slide="0"><span class="nav-item-number">01</span>Couverture</div>
+      <div class="nav-item" data-slide="1"><span class="nav-item-number">02</span>Sommaire</div>
+      <div class="nav-item" data-slide="3"><span class="nav-item-number">03</span>Insight</div>
+      <div class="nav-item" data-slide="4"><span class="nav-item-number">04</span>Enjeux</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Notre proposition</div>
+      <div class="nav-item" data-slide="6"><span class="nav-item-number">05</span>Ayming</div>
+      <div class="nav-item" data-slide="7"><span class="nav-item-number">06</span>Méthodologie</div>
+      <div class="nav-item" data-slide="10"><span class="nav-item-number">07</span>International</div>
+      <div class="nav-item" data-slide="14"><span class="nav-item-number">08</span>Références</div>
+      <div class="nav-item" data-slide="15"><span class="nav-item-number">09</span>Solution idéale</div>
+    </div>
+  </nav>
+
+  <div class="slide-counter"></div>
+
+  <main class="presentation">
+
+  <!-- 0 PORTADA -->
+  <section class="slide cover active" data-chapter="cover">
+    <div class="cover-layout">
+      <div class="cover-left">
+        <div class="cover-logo">
+          <img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming">
+        </div>
+        <h1 class="cover-title">Tarification AT/EP</h1>
+        <p class="cover-subtitle">Intervention d'Ayming pour ajuster vos cotisations au juste montant</p>
+      </div>
+      <div class="cover-right">
+        <img class="cover-image" src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/cover.jpg" alt="Site industriel">
+      </div>
+    </div>
+  </section>
+  <section class="slide" data-chapter="indice">
+    <div class="slide-inner">
+      <h1 class="slide-title">Sommaire</h1>
+      <div class="toc">
+        <div class="toc-row"><span class="toc-num">01</span><div class="toc-body"><h4>Contexte</h4><p>La situation des entreprises en Espagne</p></div></div>
+        <div class="toc-row"><span class="toc-num">02</span><div class="toc-body"><h4>Notre proposition</h4><p>Méthodologie et bénéfices</p></div></div>
+        <div class="toc-row"><span class="toc-num">03</span><div class="toc-body"><h4>Présentation d'Ayming</h4><p>Nos références et notre présence internationale</p></div></div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide cover" data-chapter="divider">
+    <div class="cover-layout">
+      <div class="cover-left">
+        <div class="cover-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+        <p class="divider-eyebrow">01</p>
+        <h1 class="cover-title">Contexte</h1>
+        <p class="cover-subtitle">La situation des entreprises en Espagne</p>
+      </div>
+      <div class="cover-right"><img class="cover-image" src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/insight.jpg" alt=""></div>
+    </div>
+  </section>
+  <section class="slide" data-chapter="insight">
+    <div class="layout-split">
+      <div class="content-side">
+        <h1 class="slide-title">Vous payez trop pour une classification que personne n'a revue</h1>
+        <p class="content-paragraph">Depuis 2018, le Tribunal Supremo (Cour suprême espagnole) est clair&nbsp;: chaque salarié cotise selon <strong>ce qu'il fait réellement</strong>, et non selon l'activité déclarée de l'entreprise (Sentencias del Tribunal Supremo, STS, 1550/2018 et 762/2019). Avec le nouveau barème et le passage à la Clasificación Nacional de Actividades Económicas (CNAE-2025, nomenclature espagnole des activités), toute la période révisable relève déjà de ces règles.</p>
+        <p class="content-paragraph">L'écart entre le taux appliqué par l'entreprise et celui que la Tesorería General de la Seguridad Social (TGSS, trésorerie de la Sécurité sociale espagnole) juge correct finit en <strong>redressements, sanctions ou procédures,</strong> et une classification erronée se paie en trop chaque mois.</p>
+        <p class="content-paragraph highlight">Chez Ayming, nous croyons qu'une entreprise ne devrait ni craindre un redressement ni payer trop. La même jurisprudence qui porte le taux du chauffeur à 6,70&nbsp;% ramène celui de l'ingénieur de bureau à 1,50&nbsp;%, et nous l'appliquons dans les deux sens.</p>
+      </div>
+      <div class="visual-side">
+        <div class="image-container">
+          <img src="https://ayming-france.github.io/assets/imagery/visites-medicales/vm-problem.jpg" alt="Classification">
+          <div class="floating-badge top-right"><span class="badge-number">2,35</span> points d'écart entre bureau et industrie</div>
+          <div class="floating-badge bottom-left"><span class="badge-number">4</span> ans de cotisations révisables</div>
+        </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="retos">
+    <div class="slide-inner">
+      <h1 class="slide-title">Les cas de divergence entre la classification CNAE et le juste montant de la cotisation AT/EP</h1>
+      <div class="three-columns">
+        <div class="column-card">
+          <div class="card-image"><img src="https://ayming-france.github.io/assets/imagery/charges-sociales/charges-2.jpg" alt="Acquisitions et réorganisations"></div>
+          <h3>Acquisitions et fusions</h3>
+          <p><strong>Un même poste, deux taux.</strong> Chaque opération apporte des comptes de cotisation avec leurs codes et leurs classifications d'origine, et les salariés passent d'un site ou d'une société à l'autre sans que leur compte les suive.</p>
+        </div>
+        <div class="column-card">
+          <div class="card-image"><img src="https://ayming-france.github.io/assets/imagery/controle-urssaf/ursaff-2.jpg" alt="Déclaration mensuelle"></div>
+          <h3>Déclaration mensuelle</h3>
+          <p><strong>Des critères hérités, jamais vérifiés.</strong> Le système de liquidation directe propose chaque mois et l'entreprise valide. Les clés d'occupation fixées à l'embauche passent d'une société à l'autre et d'une équipe paie à l'autre sans que personne ne les revoie.</p>
+        </div>
+        <div class="column-card">
+          <div class="card-image"><img src="https://ayming-france.github.io/assets/imagery/cotisations-atmp/export-arrets.jpg" alt="Évolutions réglementaires"></div>
+          <h3>Évolutions réglementaires 2026</h3>
+          <p><strong>Des taux qui montent sans que personne ne le voie.</strong> Le Cuadro II (barème par occupation) a été réduit et les occupations supprimées reviennent au taux de l'activité. Et qui n'a pas déclaré son code CNAE-2025 cotise d'office au taux le plus élevé de sa famille.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide cover" data-chapter="divider">
+    <div class="cover-layout">
+      <div class="cover-left">
+        <div class="cover-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+        <p class="divider-eyebrow">02</p>
+        <h1 class="cover-title">Méthodologie d'intervention</h1>
+        <p class="cover-subtitle">Notre démarche et ses bénéfices</p>
+      </div>
+      <div class="cover-right"><img class="cover-image" src="https://ayming-france.github.io/assets/imagery/stock/unsplash-1600880292203-757bb62b4baf-1000x1200.jpg" alt=""></div>
+    </div>
+  </section>
+  <section class="slide slide-introduction" data-chapter="introduction">
+    <div class="slide-inner">
+      <div class="intro-hero">
+        <div class="intro-hero-collage">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/metodo.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-lectura.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-mitades.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-criterio.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/metodo.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-lectura.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-mitades.jpg" alt="">
+          <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/valor-criterio.jpg" alt="">
+        </div>
+        <div class="intro-hero-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+        <div class="intro-title-band"><h2 class="intro-offer-title">Revue, récupération et sécurisation des cotisations AT/EP</h2></div>
+        <div class="intro-stats">
+          <div class="intro-stat-card"><div class="intro-stat-number">95</div><div class="intro-stat-label">consultants en coûts sociaux</div></div>
+          <div class="intro-stat-card"><div class="intro-stat-number">250M€</div><div class="intro-stat-label">récupérés pour nos clients RH</div></div>
+          <div class="intro-stat-card"><div class="intro-stat-number">40</div><div class="intro-stat-label">ans d'expérience</div></div>
+          <div class="intro-stat-card"><div class="intro-stat-number">65M€</div><div class="intro-stat-label">facturés en coûts sociaux</div></div>
+        </div>
+      </div>
+      <!-- Cifras de Ayming International HR facilitadas por el porteur el 8 de septiembre de 2026. -->
+      <div class="intro-content">
+        <p class="intro-pitch">Pour les groupes industriels qui veulent déclarer juste et payer le juste montant de cotisations sociales, Ayming International HR revoit la classification AT/EP, récupère les sommes indues et corrige le paramétrage, avec des honoraires au succès.</p>
+      </div>
+    </div>
+  </section>
+  <section class="slide" data-chapter="metodo-1">
+    <div class="value-detail-layout">
+      <div class="value-detail-content">
+        <div class="area-head"><div class="area-ic"><i data-lucide="percent"></i></div><div class="area-htext"><div class="area-title">Taux de cotisation AT/EP</div></div></div>
+        <ul class="value-detail-list vd-titled">
+          <li><h4>Cartographie des activités</h4><p>Analyser vos pratiques et identifier les activités réellement exercées sur chaque site.</p></li>
+          <li><h4>Cartographie des occupations</h4><p>Identifier les occupations du Cuadro II pouvant ouvrir un taux AT/EP spécifique, distinct de celui qui découle du CNAE.</p></li>
+          <li><h4>Chiffrage de l'impact</h4><p>Comparer le taux effectivement appliqué à celui qui aurait dû l'être, et chiffrer les surcotisations passées et les économies futures.</p></li>
+          <li><h4>Demande et régularisation</h4><p>Préparer les demandes de remboursement et de régularisation auprès de la Seguridad Social, pièces justificatives à l'appui.</p></li>
+          <li><h4>Suivi des demandes</h4><p>Suivre les décisions administratives ou judiciaires jusqu'à leur exécution, en lien avec les organismes compétents. En cas de difficulté, un cabinet d'avocats indépendants, choisi d'un commun accord, prend le relais.</p></li>
+        </ul>
+      </div>
+      <div class="value-detail-visual">
+        <div class="value-image-container"><img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/metodo.jpg" alt="Taux de cotisation AT/EP"></div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="documentos">
+    <div class="slide-inner">
+      <h1 class="slide-title">Documents nécessaires</h1>
+      <p class="content-paragraph lead-compact">Ce dont nous avons besoin pour lancer l'étude.</p>
+      <div class="docs3">
+        <div class="docs3-col c">
+          <div class="docs3-head">
+            <div class="docs3-ic"><i data-lucide="folder"></i></div>
+            <h4>Commun</h4>
+          </div>
+          <ul class="docs3-list">
+            <li>Liste des entités, sites et comptes de cotisation (CCC, Código Cuenta de Cotización), avec le CNAE actuel et historique, et des fusions, acquisitions et réorganisations ayant touché le périmètre analysé</li>
+            <li>Fichier historique des salariés&nbsp;: identifiant, entité/CCC, site, poste, dates d'entrée, de sortie et de changement de poste, code d'occupation appliqué</li>
+            <li>Extraction de paie des 4 dernières années (format Excel/CSV)</li>
+            <li>Recibo de Liquidación de Cotizaciones (RLC, bordereau de cotisations) de chaque période</li>
+            <li>Fichiers de calcul et bases du Sistema de Liquidación Directa (SLD, déclaration directe des cotisations), si disponibles</li>
+          </ul>
+        </div>
+        <div class="docs3-col a">
+          <div class="docs3-head">
+            <div class="docs3-ic"><i data-lucide="percent"></i></div>
+            <h4>Taux AT/EP</h4>
+          </div>
+          <ul class="docs3-list">
+            <li>Fiches de poste, avec les évaluations des risques professionnels correspondantes</li>
+            <li>Documentation de l'activité exercée sur chaque site&nbsp;: autorisations d'activité, description des activités, documents de prévention des risques professionnels (PRL), tout document établissant la séparation fonctionnelle et opérationnelle des activités</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide cover" data-chapter="divider">
+    <div class="cover-layout">
+      <div class="cover-left">
+        <div class="cover-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+        <p class="divider-eyebrow">03</p>
+        <h1 class="cover-title">Présentation d'Ayming</h1>
+        <p class="cover-subtitle">Nos références et notre présence internationale</p>
+      </div>
+      <div class="cover-right"><img class="cover-image" src="https://ayming-france.github.io/assets/imagery/charges-sociales/charges-4.jpg" alt=""></div>
+    </div>
+  </section>
+  <section class="slide" data-chapter="hr-intl-modelo">
+    <style>
+      /* Reconstruit en recit a 3 temps (le cas est ponctuel, le groupe mobilise,
+         l'Espagne produit) relies par des chevrons, a la place des trois blocs
+         (pastille de chiffres + deux cartes a puces) : l'utilisateur veut une
+         histoire de strategie, pas un inventaire. Les chiffres du groupe restent
+         sur la diapositive "Lider europeo" (implantation), pas ici. */
+      .slide[data-chapter="hr-intl-modelo"] .modelo-flow { display: flex; align-items: stretch; gap: 0; width: 100%; max-width: 1160px; margin-top: var(--space-10); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step { flex: 1; background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-xl); padding: var(--space-24) var(--space-22) var(--space-20); box-shadow: 0 6px 24px rgba(var(--blue-dark-rgb), .06); text-align: left; }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-num { width: 32px; height: 32px; border-radius: var(--radius-circle); color: var(--bg-white); font-size: var(--font-14); font-weight: var(--weight-bold); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-14); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step.s1 .modelo-num { background: var(--blue-primary); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step.s2 .modelo-num { background: var(--gradient-green-end); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step.s3 .modelo-num { background: var(--blue-dark); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step h3 { font-size: var(--font-16); color: var(--blue-dark); font-weight: var(--weight-bold); margin: 0 0 var(--space-10); line-height: 1.25; }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-step p { font-size: var(--font-13); color: #4a5b68; line-height: 1.55; margin: 0; }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-chevron { flex: 0 0 40px; display: flex; align-items: center; justify-content: center; }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-chevron svg { width: 24px; height: 24px; color: var(--blue-primary); }
+      .slide[data-chapter="hr-intl-modelo"] .modelo-close { margin: var(--space-22) auto 0; max-width: 1160px; background: #f7fbfd; border-radius: var(--radius-lg); padding: var(--space-16) var(--space-24); text-align: center; font-size: var(--font-16); font-weight: var(--weight-semibold); color: var(--blue-dark); }
+    </style>
+    <div class="slide-inner">
+      <h1 class="slide-title">Une réponse globale, une production locale</h1>
+      <p class="content-paragraph lead-compact">Ayming International HR centralise son activité coûts sociaux pour mobiliser les meilleurs spécialistes sur chaque mission, et produit le service dans le pays.</p>
+      <div class="modelo-flow">
+        <div class="modelo-step s1">
+          <div class="modelo-num">1</div>
+          <h3>Un centre d'excellence plutôt que des bureaux dispersés</h3>
+          <p>Nous regroupons l'activité coûts sociaux dans une seule équipe de 95 consultants spécialisés, au lieu de la répartir en effectifs par pays. Les ressources sont affectées par spécialité, et non par géographie.</p>
+        </div>
+        <div class="modelo-chevron"><i data-lucide="chevron-right"></i></div>
+        <div class="modelo-step s2">
+          <div class="modelo-num">2</div>
+          <h3>Ayming International HR se mobilise sur votre dossier</h3>
+          <p>Ayming International HR affecte à chaque mission les meilleurs spécialistes du mécanisme, avec des analystes de données, une méthodologie unifiée et la gestion des clients stratégiques, appuyés par les équipes qualité et R&D.</p>
+        </div>
+        <div class="modelo-chevron"><i data-lucide="chevron-right"></i></div>
+        <div class="modelo-step s3">
+          <div class="modelo-num">3</div>
+          <h3>La mission est produite en Espagne</h3>
+          <p>La mission s'exécute dans le pays&nbsp;: en espagnol, avec une présence locale, un cabinet d'avocats indépendants, choisi d'un commun accord parmi les cabinets espagnols, et un contact direct avec les administrations.</p>
+        </div>
+      </div>
+      <div class="modelo-close">Un cabinet local est limité à ses effectifs. Vous bénéficiez de toutes les compétences du groupe.</div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="hr-intl-pruebas">
+    <style>
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-26); width: 100%; max-width: 1160px; margin-top: var(--space-8); }
+      /* Carte image + texte : la photo est en plein bord (overflow:hidden sur la carte
+         fait office de masque pour les coins arrondis du haut), le padding d'origine
+         se deplace sur .pruebas-body qui porte tout le texte. Le badge d'icone rond est
+         retire sur les 3 cartes : redondant a cote d'une photo, la puce de pratique
+         suffit a categoriser. */
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-card { background: var(--bg-white); border: 1px solid #e9f0f5; border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 6px 24px rgba(var(--blue-dark-rgb), .06); text-align: left; }
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-banner { display: block; width: 100%; height: 230px; object-fit: cover; }
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-body { padding: var(--space-12) var(--space-18) var(--space-12); }
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-card h3 { font-size: var(--font-15); color: var(--blue-dark); font-weight: var(--weight-bold); margin: 0 0 var(--space-6); line-height: 1.25; }
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-card p { font-size: 12.5px; color: #4a5b68; line-height: 1.45; margin: 0; }
+      /* Puce de pratique, meme couple couleurs que les badges d'icone de la maquette
+         (fond #e9f5fc / texte var(--blue-primary)), en version pastille pour rester lisible a
+         cote d'un titre de carte. */
+      .slide[data-chapter="hr-intl-pruebas"] .pruebas-chip { display: inline-block; background: #e9f5fc; color: var(--blue-primary);
+        font-size: 10.5px; font-weight: var(--weight-bold); letter-spacing: .06em; text-transform: uppercase;
+        padding: 3px var(--space-10); border-radius: 999px; margin-bottom: var(--space-8); }
+    </style>
+    <div class="slide-inner">
+      <h1 class="slide-title">Notre stratégie à l'œuvre, trois exemples</h1>
+      <p class="content-paragraph lead-compact">Cette offre n'est pas la seule à fonctionner ainsi&nbsp;: trois exemples du groupe, en services délégués, logiciel et conseil.</p>
+      <div class="pruebas-grid">
+        <div class="pruebas-card p1">
+          <img class="pruebas-banner" src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/pruebas-at-declaracion.jpg" alt="Déclaration d'un incident depuis un téléphone">
+          <div class="pruebas-body">
+            <span class="pruebas-chip">Services délégués</span>
+            <h3>Déclarations d'accidents dans plus de 28 pays</h3>
+            <p>Ayming International déclare avec les formulaires et systèmes locaux de chaque pays&nbsp;: Net-entreprises en France, Sistema Delt@ et CoNTA en Espagne, la déclaration INAIL en Italie.</p>
+          </div>
+        </div>
+        <div class="pruebas-card p3">
+          <img class="pruebas-banner" src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/pruebas-auditoria.jpg" alt="Contrôle international">
+          <div class="pruebas-body">
+            <span class="pruebas-chip">Logiciel</span>
+            <h3>Contrôles et inspections HSE</h3>
+            <p>Un même module de contrôle hygiène, sécurité et environnement (HSE) déployé pays par pays, aligné sur les normes ISO 45001 et ISO 14001.</p>
+          </div>
+        </div>
+        <div class="pruebas-card p2">
+          <img class="pruebas-banner" src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/pruebas-medioambiente.jpg?v=4" alt="Agronome au champ avec son téléphone">
+          <div class="pruebas-body">
+            <span class="pruebas-chip">Conseil</span>
+            <h3>Développement durable et environnement</h3>
+            <p>Une vision internationale, une approche locale&nbsp;: fiscalité environnementale, certificats d'économies d'énergie, aides et publication extra-financière selon la directive CSRD.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="hr-intl-espana">
+    <div class="slide-inner">
+      <div class="ancrage-layout">
+        <div class="ancrage-text">
+          <h1 class="slide-title title-espana">Bénéficier de la proximité et de l'expérience locale nécessaires...</h1>
+          <p>Nos équipes accompagnent nos clients au quotidien en s'appuyant sur un <strong>écosystème de professionnels</strong> dans tout le pays&nbsp;: un maillage de cabinets d'avocats indépendants spécialisés en sécurité sociale, graduados sociales (conseils en droit social), experts-comptables et médecins indépendants, présents à Madrid, Barcelone et Valence.</p>
+        </div>
+        <div class="ancrage-map">
+          <img src="https://ayming-france.github.io/assets/maps/spain-map.svg" alt="Espagne" />
+        </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="implantation">
+    <style>
+      .slide[data-chapter="implantation"] .impl-stats { display: flex; justify-content: center; gap: 0; width: 100%; max-width: 900px; margin: var(--space-26) auto 0; }
+      .slide[data-chapter="implantation"] .impl-stat { flex: 1; text-align: center; padding: 0 var(--space-12); border-right: 1px solid var(--tint-grey-15); }
+      .slide[data-chapter="implantation"] .impl-stat:last-child { border-right: none; }
+      .slide[data-chapter="implantation"] .impl-stat-num { font-size: 22px; font-weight: var(--weight-bold); color: var(--blue-primary); line-height: var(--leading-tight); white-space: nowrap; }
+      .slide[data-chapter="implantation"] .impl-stat-label { font-size: var(--font-11); font-weight: var(--weight-semibold); color: var(--text-gray); text-transform: uppercase; letter-spacing: .3px; margin-top: var(--space-6); }
+      /* Le SVG porte une importante marge morte interne (haut surtout, un peu a
+         droite), heritee de son propre viewBox. On recadre en zoomant l'image
+         nettement au-dela de sa taille de base puis en la remontant dans un
+         cadre a hauteur fixe et overflow masque, pour ne garder que la carte et
+         ses etiquettes : la bande morte disparait et la carte visible grossit. */
+      .slide[data-chapter="implantation"] .implantation-container { height: 452px; overflow: hidden;
+        align-items: flex-start; margin: 2px auto 0; }
+      .slide[data-chapter="implantation"] .implantation-eu { height: 575px; max-height: none; width: auto;
+        transform: translateY(-122px); }
+    </style>
+    <div class="slide-inner">
+      <h1 class="slide-title title-implantacion">... avec la force de toute l'équipe Ayming&nbsp;International&nbsp;HR, leader européen des coûts sociaux</h1>
+      <div class="implantation-container">
+        <img src="https://ayming-france.github.io/assets/maps/eu-map.svg" alt="Europe" class="implantation-eu">
+      </div>
+      <div class="impl-stats">
+        <div class="impl-stat"><div class="impl-stat-num">95</div><div class="impl-stat-label">Consultants en coûts sociaux</div></div>
+        <div class="impl-stat"><div class="impl-stat-num">250M€</div><div class="impl-stat-label">Récupérés pour nos clients RH</div></div>
+        <div class="impl-stat"><div class="impl-stat-num">40</div><div class="impl-stat-label">Ans d'expérience</div></div>
+        <div class="impl-stat"><div class="impl-stat-num">65M€</div><div class="impl-stat-label">Facturés en coûts sociaux</div></div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="clientes">
+    <style>
+      .slide[data-chapter="clientes"] .slide-inner { max-width: 1160px; }
+      .slide[data-chapter="clientes"] .slide-title { margin-bottom: 48px; }
+      .cl-wrap { display: grid; grid-template-columns: 1.18fr 1px 0.92fr 1px 0.92fr; gap: 0 var(--space-26); width: 100%; align-items: stretch; }
+      .cl-div { width: 1px; background: linear-gradient(180deg, transparent 0%, #d6e0ea 14%, #d6e0ea 86%, transparent 100%); }
+      .cl-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .cl-stat { font-size: 40px; font-weight: var(--weight-black); color: var(--blue-primary); line-height: var(--leading-tight); letter-spacing: -1px; }
+      .cl-label { font-size: var(--font-13); font-weight: var(--weight-bold); color: var(--blue-dark); margin-top: var(--space-9); line-height: var(--leading-snug); min-height: 34px; }
+      .cl-cap { font-size: 11.5px; font-style: italic; color: #6b7280; margin-top: 7px; line-height: 1.35; min-height: 34px; padding: 0 var(--space-6); }
+      .cl-grid { display: grid; align-items: center; justify-items: center; width: 100%; margin-top: var(--space-16); }
+      .cl-grid.g3 { grid-template-columns: repeat(3, 1fr); gap: var(--space-18) var(--space-16); }
+      .cl-grid.g2 { grid-template-columns: repeat(2, 1fr); gap: var(--space-26) var(--space-20); }
+      .cl-grid img { max-width: 90%; object-fit: contain; }
+      .cl-col-1 .cl-grid img { max-height: 24px; }
+      .cl-col-2 .cl-grid img, .cl-col-3 .cl-grid img { max-height: 38px; }
+      .cl-col-3 .cl-grid img:last-child { grid-column: 1 / -1; justify-self: center; }
+      /* 17 logos sur trois colonnes laissent une derniere rangee incomplete. En flex,
+         cette rangee se centre d elle-meme au lieu de laisser un logo orphelin. */
+      .cl-col-1 .cl-grid.g3 { display: flex; flex-wrap: wrap; justify-content: center; }
+      .cl-col-1 .cl-grid.g3 img { flex: 0 0 auto; width: calc((100% - 2 * var(--space-16)) / 3); object-fit: contain; }
+    </style>
+    <div class="slide-inner">
+      <h1 class="slide-title">Ils font déjà confiance à Ayming</h1>
+      <div class="cl-wrap">
+        <div class="cl-col cl-col-1">
+          <div class="cl-stat">+2&nbsp;500</div>
+          <div class="cl-label">Clients en Espagne</div>
+          <div class="cl-grid g3">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/alstom.png" alt="Alstom">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/bbva.png" alt="BBVA">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/ing-direct.png" alt="ING Direct">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/rsi.png" alt="RSI">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/popular.png" alt="Banco Popular">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/santalucia.png" alt="Santaluc&iacute;a">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/sareb.png" alt="Sareb">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/nationale-nederlanden.png" alt="Nationale-Nederlanden">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/louis-vuitton.png" alt="Louis Vuitton">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/pelayo.png" alt="Pelayo Vida">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/cabify.png" alt="Cabify">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/navantia.png" alt="Navantia">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/ebn.png" alt="EBN Banco">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/seat.png" alt="SEAT">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/danone.png" alt="Danone">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/glovo.png" alt="Glovo">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/veolia.png" alt="Veolia">
+          </div>
+        </div>
+        <div class="cl-div"></div>
+        <div class="cl-col cl-col-2">
+          <div class="cl-stat">+10 millions</div>
+          <div class="cl-label">Bulletins de paie analysés par an</div>
+          <div class="cl-cap">Gestion des accidents du travail et des maladies professionnelles</div>
+          <div class="cl-grid g2">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/legrand.png" alt="Legrand">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/airbus.png" alt="Airbus">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/veolia.png" alt="Veolia">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/vinci.png" alt="Vinci Energies">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/schneider.png" alt="Schneider Electric">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/safran.png" alt="Safran">
+          </div>
+        </div>
+        <div class="cl-div"></div>
+        <div class="cl-col cl-col-3">
+          <div class="cl-stat">8&nbsp;490</div>
+          <div class="cl-label">Clients de tous les secteurs d'activité</div>
+          <div class="cl-cap">Maîtrise des coûts sociaux</div>
+          <div class="cl-grid g2">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/europcar.png" alt="Europcar">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/unilever.png" alt="Unilever">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/stef.png" alt="STEF">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/agco.png" alt="AGCO">
+            <img src="https://ayming-france.github.io/assets/imagery/es-cotizaciones-sociales/clientes/smurfit.png" alt="Smurfit Kappa">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-logo"><img src="https://ayming-france.github.io/assets/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="valeur">
+    <div class="slide-inner">
+        <div class="uis-main">
+          <h1 class="slide-title uis-title">Une solution idéale</h1>
+          <div class="uis-grid">
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="scan-search"></i></div>
+              <p>Revue complète de la classification&nbsp;: codes CNAE et diagnostic à 360° des postes, occupations et taux appliqués, sur données historiques et réalité opérationnelle.</p>
+            </div>
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="file-check"></i></div>
+              <p>Déclaration du code CNAE-2025 et des occupations, pour ne plus cotiser d'office au taux le plus élevé.</p>
+            </div>
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="calculator"></i></div>
+              <p>Chiffrage des montants récupérables et des économies récurrentes.</p>
+            </div>
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="landmark"></i></div>
+              <p>Prise en charge des démarches auprès des organismes&nbsp;: demandes, réponses aux requêtes et suivi administratif, jusqu'au remboursement effectif et à la correction des paramétrages.</p>
+            </div>
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="users"></i></div>
+              <p>Équipe de consultants dédiée à plein temps, mobilisable immédiatement.</p>
+            </div>
+            <div class="uis-item">
+              <div class="uis-ic"><i data-lucide="monitor-check"></i></div>
+              <p>Pilotage clair&nbsp;: rapports réguliers, traçabilité des positions, transparence sur les risques et outils numériques d'échange d'informations.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="uis-photo">
+      <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/cierre.jpg" alt="Site industriel">
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+  <section class="slide" data-chapter="gracias">
+    <style>
+      /* Meme principe que .uis-photo (slide "valeur") : la photo est posee en absolu contre les
+         bords de la section, hors de fitSlide, et la colonne de texte occupe la moitie gauche. */
+      .slide[data-chapter="gracias"] .slide-inner { max-width: none; width: min(42%, 620px); margin: 0 auto 0 max(0px, calc(25% - min(21%, 310px) - 40px)); }
+      .gracias-left { text-align: left; }
+      .gracias-logos { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-34); }
+      .gracias-logos img { height: 40px; width: auto; display: block; }
+      .gracias-logos .gl-sep { font-size: var(--font-18); color: #c3ced6; }
+      .gracias-lead { font-size: 22px; font-weight: var(--weight-bold); color: var(--blue-dark); margin: 0 0 var(--space-22); }
+      .gc-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-16); }
+      .gc-row:last-child { margin-bottom: 0; }
+      .gc-ic { width: 44px; height: 44px; border-radius: var(--radius-circle); flex-shrink: 0; background: var(--blue-primary); display: flex; align-items: center; justify-content: center; }
+      .gc-ic svg { width: 20px; height: 20px; color: var(--bg-white); }
+      .gc-text { font-size: var(--font-14); color: var(--blue-dark); font-weight: var(--weight-semibold); line-height: 1.35; }
+      .gc-sub { font-size: 12.5px; color: #5a6b78; font-weight: 400; margin-top: 2px; }
+      .gracias-photo { position: absolute; top: 0; right: 0; bottom: var(--banner-h); width: 50%; overflow: hidden; }
+      .gracias-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
+    </style>
+    <div class="slide-inner">
+        <div class="gracias-left">
+          <div class="gracias-logos">
+            <img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming">
+          </div>
+          <p class="gracias-lead">Merci.</p>
+          <div class="gc-row">
+            <div class="gc-ic"><i data-lucide="globe"></i></div>
+            <div class="gc-text">www.ayming.com</div>
+          </div>
+          <div class="gc-row">
+            <div class="gc-ic"><i data-lucide="mail"></i></div>
+            <div class="gc-text">Olivier Meynard<div class="gc-sub">omeynard@ayming.com</div></div>
+          </div>
+          <div class="gc-row">
+            <div class="gc-ic"><i data-lucide="map-pin"></i></div>
+            <div class="gc-text">Ayming España<div class="gc-sub">Paseo de la Castellana 91, planta 13, 28046 Madrid</div></div>
+          </div>
+          <div class="gc-row">
+            <div class="gc-ic"><i data-lucide="map-pin"></i></div>
+            <div class="gc-text">Ayming International<div class="gc-sub">114 rue Chaptal, 92300 Levallois-Perret, France</div></div>
+          </div>
+        </div>
+    </div>
+    <div class="gracias-photo">
+      <img src="https://ayming-france.github.io/assets/imagery/es-revision-tipo-cotizacion/cover.jpg" alt="Site industriel" style="object-position: 40% 35%">
+    </div>
+    <div class="company-logo"><img src="https://raw.githubusercontent.com/ayming-france/assets/main/logos/ayming-logo.png" alt="Ayming"></div>
+  </section>
+
+  </main>
+
+  <div class="keyboard-hint">
+    <span><span class="key" id="key-prev">&larr;</span><span class="key" id="key-next">&rarr;</span> Naviguer</span>
+    <span><span class="key" id="key-fullscreen">F</span> Plein écran</span>
+  </div>
+
+  <script src="https://ayming-france.github.io/assets/engine/slides.js"></script>
+  <script src="https://ayming-france.github.io/assets/engine/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+
+</body>
+</html>
