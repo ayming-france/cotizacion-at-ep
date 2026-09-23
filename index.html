@@ -1075,6 +1075,11 @@
 
   <section class="slide" data-chapter="cobertura">
     <style>
+      .slide[data-chapter="cobertura"] {
+        --ay-primary: var(--blue-primary); --ay-dark: var(--blue-dark);
+        --ay-text: var(--text-dark); --ay-gray: var(--text-gray); --ay-light: var(--text-light);
+        --ay-bg-subtle: var(--bg-subtle); --ay-bg-light: var(--bg-light);
+      }
       /* .slide-inner est une colonne flex centree : sans width 100% la grille se reduit a
          son contenu et la slide parait etriquee. On elargit aussi le cadre pour ce chapitre. */
       .slide[data-chapter="cobertura"] .slide-inner { max-width: 1340px; }
